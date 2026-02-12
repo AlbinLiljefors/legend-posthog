@@ -105,5 +105,4 @@ Tests use Vitest (configured separately in `vitest.config.ts`) with jsdom enviro
 
 - This is a **prototype** - all data is mocked in `demoData.ts`
 - No real GitHub API integration exists
-- The `lovable-tagger` plugin runs in development mode for Lovable.dev integration
 - Server runs on IPv6 (`::`) port 8080 with HMR overlay disabled
