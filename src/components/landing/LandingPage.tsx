@@ -18,7 +18,7 @@ export function LandingPage() {
   const heroScale = useTransform(scrollYProgress, [0, 0.15], [1, 0.95]);
 
   const handleConnectGithub = () => {
-    navigate("/repos");
+    navigate("/signin");
   };
 
   return (

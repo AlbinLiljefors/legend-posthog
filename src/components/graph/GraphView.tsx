@@ -16,7 +16,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Search, ChevronDown, Layers, LogOut, ArrowLeft } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { getStoredUser, clearStoredUser } from "@/components/EmailGate";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -466,7 +467,13 @@ function GraphViewInner() {
     [navigate]
   );
 
+  const user = getStoredUser();
+  const initials = user?.name
+    ? user.name.split(" ").map((w: string) => w[0]).join("").toUpperCase().slice(0, 2)
+    : "??";
+
   const handleSignOut = useCallback(() => {
+    clearStoredUser();
     navigate("/");
   }, [navigate]);
 
@@ -587,8 +594,7 @@ function GraphViewInner() {
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="icon">
                 <Avatar className="w-8 h-8">
-                  <AvatarImage src="https://github.com/shadcn.png" />
-                  <AvatarFallback>JD</AvatarFallback>
+                  <AvatarFallback>{initials}</AvatarFallback>
                 </Avatar>
               </Button>
             </DropdownMenuTrigger>

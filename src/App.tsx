@@ -3,9 +3,8 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { EmailGate } from "./components/EmailGate";
+import { SignInPage } from "./components/EmailGate";
 import { LandingPage } from "./components/landing/LandingPage";
-import { RepoSelection } from "./components/repos/RepoSelection";
 import { LoadingAnimation } from "./components/loading/LoadingAnimation";
 import { GraphView } from "./components/graph/GraphView";
 import NotFound from "./pages/NotFound";
@@ -17,17 +16,15 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <EmailGate>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/repos" element={<RepoSelection />} />
-            <Route path="/loading/:repoId" element={<LoadingAnimation />} />
-            <Route path="/graph/:repoId" element={<GraphView />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </EmailGate>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/signin" element={<SignInPage />} />
+          <Route path="/loading/:repoId" element={<LoadingAnimation />} />
+          <Route path="/graph/:repoId" element={<GraphView />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
 );
