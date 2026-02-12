@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { Github, ArrowRight, Layers, GitBranch, Zap, ChevronDown, MousePointer, Code2, Network, Workflow } from "lucide-react";
+import { ArrowRight, Layers, GitBranch, Zap, ChevronDown, Network, Workflow } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { HeroBackground } from "./HeroBackground";
 import { TrustSection } from "./TrustSection";
@@ -17,13 +17,13 @@ export function LandingPage() {
   const heroOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
   const heroScale = useTransform(scrollYProgress, [0, 0.15], [1, 0.95]);
 
-  const handleConnectGithub = () => {
+  const handleExplore = () => {
     navigate("/signin");
   };
 
   return (
     <div ref={containerRef} className="relative bg-background">
-      {/* Refined top bar */}
+      {/* Top bar */}
       <motion.header
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -39,7 +39,7 @@ export function LandingPage() {
         <Button
           variant="ghost"
           size="sm"
-          onClick={handleConnectGithub}
+          onClick={handleExplore}
           className="text-muted-foreground hover:text-foreground"
         >
           Sign in
@@ -49,15 +49,13 @@ export function LandingPage() {
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <HeroBackground />
-
-        {/* Subtle gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background/60 to-background pointer-events-none" />
 
         <motion.div
           className="relative z-10 text-center px-6 max-w-5xl mx-auto pt-20"
           style={{ opacity: heroOpacity, scale: heroScale }}
         >
-          {/* Eyebrow badge */}
+          {/* Eyebrow */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -65,8 +63,8 @@ export function LandingPage() {
             className="mb-8"
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/80 border border-border/50 backdrop-blur-sm">
-              <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-              <span className="text-sm font-medium text-muted-foreground">Understand code in seconds, not hours</span>
+              <div className="w-2 h-2 rounded-full bg-[#F54E00] animate-pulse" />
+              <span className="text-sm font-medium text-muted-foreground">PostHog codebase — fully mapped</span>
             </div>
           </motion.div>
 
@@ -77,9 +75,9 @@ export function LandingPage() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-foreground mb-6 leading-[1.1]"
           >
-            Navigate any codebase
+            Explore PostHog's
             <br />
-            <span className="text-primary">like you wrote it</span>
+            <span className="text-primary">architecture, visually</span>
           </motion.h1>
 
           {/* Subheadline */}
@@ -89,11 +87,11 @@ export function LandingPage() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed"
           >
-            Auto-generate interactive architecture diagrams. See dependencies,
-            data flows, and how everything connects—instantly.
+            Interactive architecture diagrams of the PostHog codebase.
+            See how Django, React, ClickHouse, Celery, and 50+ modules connect — from system level down to individual files.
           </motion.p>
 
-          {/* CTA Buttons */}
+          {/* CTA */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -102,21 +100,12 @@ export function LandingPage() {
           >
             <Button
               size="lg"
-              onClick={handleConnectGithub}
+              onClick={handleExplore}
               className="gap-2.5 text-base px-8 h-14 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group"
             >
-              <Github className="w-5 h-5" />
-              Connect GitHub
+              <Network className="w-5 h-5" />
+              Explore the map
               <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              onClick={handleConnectGithub}
-              className="gap-2 text-base px-8 h-14 rounded-xl bg-background/50 backdrop-blur-sm hover:bg-secondary/80 transition-all duration-300"
-            >
-              <MousePointer className="w-4 h-4" />
-              Try demo
             </Button>
           </motion.div>
 
@@ -147,12 +136,11 @@ export function LandingPage() {
         </motion.div>
       </section>
 
-      {/* Features Section */}
+      {/* What's mapped Section */}
       <section className="py-32 px-6 relative">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/20 to-background pointer-events-none" />
 
         <div className="max-w-6xl mx-auto relative">
-          {/* Section header */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -161,32 +149,31 @@ export function LandingPage() {
             className="text-center mb-20"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              How it works
+              What's inside
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Connect your repository and get a complete architectural overview in seconds
+              The full PostHog monorepo — analyzed and visualized across four zoom levels
             </p>
           </motion.div>
 
-          {/* Feature cards grid */}
           <div className="grid md:grid-cols-3 gap-6">
             <FeatureCard
               index={0}
-              icon={<Github className="w-6 h-6" />}
-              title="Connect your repo"
-              description="Link any GitHub repository. We analyze the codebase structure, imports, and dependencies automatically."
+              icon={<Layers className="w-6 h-6" />}
+              title="8 system groups"
+              description="Django backend, React frontend, Node.js event engine, Celery workers, Temporal, Rust services, Go livestream, and infrastructure."
             />
             <FeatureCard
               index={1}
               icon={<Workflow className="w-6 h-6" />}
-              title="Explore the map"
-              description="Navigate from system-level architecture down to individual files. Click any module to see its internals."
+              title="4 zoom levels"
+              description="Context → System → Module → File. Start with the big picture and drill down to individual files and their connections."
             />
             <FeatureCard
               index={2}
               icon={<Zap className="w-6 h-6" />}
-              title="Ship faster"
-              description="Onboard in minutes, not days. Find exactly what you need and understand how changes will ripple through."
+              title="Imports, calls & data flows"
+              description="Toggle between edge types to trace how data moves through the event pipeline, from ingestion to ClickHouse to the dashboard."
             />
           </div>
         </div>
@@ -198,18 +185,18 @@ export function LandingPage() {
           <ValueProp
             index={0}
             icon={<Workflow className="w-8 h-8" />}
-            title="See everything at once"
-            description="Interactive node-based diagrams reveal dependencies, data flows, and module relationships. Stop guessing how pieces fit together—see it."
-            features={["System → Module → File zoom", "Color-coded node types", "Animated data flow edges"]}
+            title="See how PostHog fits together"
+            description="From the Django API to the React frontend, from the plugin server to ClickHouse — see every dependency and data flow at a glance."
+            features={["System → Module → File zoom", "Color-coded by component type", "Animated data flow edges"]}
             imageSrc="/Module_level.jpg"
           />
 
           <ValueProp
             index={1}
             icon={<GitBranch className="w-8 h-8" />}
-            title="Deep dive on demand"
-            description="Click any module to explore its functions, technical decisions, and connections. Get the context you need without reading every file."
-            features={["Technical specifications", "Implementation details", "Input/output connections"]}
+            title="Drill into any module"
+            description="Click any node to see its technical specs, implementation details, and connections. Understand how the event pipeline, feature flags, or session recording actually work."
+            features={["Technical specifications per module", "Input/output connections", "Architecture descriptions"]}
             reversed
             imageSrc="/Info_page.jpg"
           />
@@ -217,9 +204,9 @@ export function LandingPage() {
           <ValueProp
             index={2}
             icon={<Zap className="w-8 h-8" />}
-            title="Filter what matters"
-            description="Toggle edge types, enable focus mode, and adjust connection depth. See only imports, data flows, or function calls—cut through the noise and find what you need."
-            features={["Edge type filtering", "Focus mode with adjustable depth", "Dim or hide unrelated nodes"]}
+            title="Focus on what you're working on"
+            description="Use focus mode to highlight a module and its neighbors. Filter by edge type to see only imports, data flows, or function calls — cut through the noise."
+            features={["Edge type filtering", "Focus mode with adjustable depth", "Search across all modules"]}
             imageSrc="/File_level.jpg"
           />
         </div>
@@ -237,18 +224,18 @@ export function LandingPage() {
           className="max-w-3xl mx-auto text-center relative"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Ready to map your codebase?
+            Ready to explore?
           </h2>
           <p className="text-xl text-muted-foreground mb-10">
-            Connect your GitHub and explore your first diagram in under a minute.
+            See the PostHog architecture like never before. Takes 10 seconds to get started.
           </p>
           <Button
             size="lg"
-            onClick={handleConnectGithub}
+            onClick={handleExplore}
             className="gap-2.5 text-base px-10 h-14 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group"
           >
-            <Github className="w-5 h-5" />
-            Get started free
+            <Network className="w-5 h-5" />
+            Explore the map
             <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
           </Button>
         </motion.div>
@@ -263,7 +250,7 @@ export function LandingPage() {
             </div>
             <span className="font-medium text-foreground">Legend</span>
           </div>
-          <p>© 2025 Legend. Built for developers who ship.</p>
+          <p>© 2026 Legend. Built for developers who ship.</p>
         </div>
       </footer>
     </div>
