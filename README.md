@@ -1,8 +1,6 @@
-# Welcome to your Lovable project
+# Legend — PostHog Architecture Visualization
 
-## Project info
-
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+Interactive C4 architecture diagram for the PostHog codebase, built with React + React Flow.
 
 ## How can I edit this code?
 
