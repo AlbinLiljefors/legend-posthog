@@ -1,0 +1,7 @@
+{
+  "enabled": true,
+  "repository": "LEGEND-LLP/legend-posthog",
+  "branch": "main",
+  "frequency": "on_save",
+  "commit_message": "lovable: sync changes"
+}
